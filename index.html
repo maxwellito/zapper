@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>ZAPPEЯ : popup killr!</title>
+    <style>
+      body {
+        margin: 0 0 40px;
+        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 300;
+        font-size: 24px;
+        color: #666666;
+        background-color: #f9f9f9;
+      }
+      .link {
+        color: inherit;
+      }
+      .panel {
+        margin: 5% 10%;
+        width: 80%;
+        text-align: center;
+      }
+      .button {
+        padding: 6px 12px;
+        box-shadow: 4px 4px 0 #ccc;
+        color: #ffffff;
+        background-color: #000000;
+        font-style: italic;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .credits {
+        font-size: 0.6125em;
+        font-style: italic;
+      }
+
+      @media only screen and (max-width:480px) {
+        .panel {
+          position: inherit;
+          width: auto;
+          height: auto;
+          margin: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="panel">
+
+      <p>Drag and drop the following button to your bookmark bar.<p>
+
+      <p><a class="button" onclick="alert('Don\'t click on it, just drag and drop it to your bookmark bar. Try again.'); return false;" href="javascript:(a%20=%20(b%20=%20document).createElement('script')).src%20=%20'http://maxwellito.github.io/zapper/injector.js',%20b.body.appendChild(a);void(0);" title="ZAPPEЯ link">ZAPPEЯ</a></p>
+
+      <p class="credits">by <a class="link" href="https://twitter.com/mxwllt">@mxwllt</a> on <a class="link" href="https://github.com/maxwellito/zapper">GitHub</a></p>
+    </div>
+
+  </body>
+</html>
