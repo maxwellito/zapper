@@ -1,3 +1,6 @@
+/**
+ * This is hacky? No sh*t Sherlock!
+ */
 (function(){
   var layerEl, introEl, abortEl, overlayEl;
   var ESC_KEY = 27;
@@ -25,14 +28,26 @@
     // Intro
     introEl = document.createElement('p')
     introEl.style.width = '50%';
-    introEl.style.fontSize = '2rem';
+    introEl.style.fontSize = '1.5rem';
     introEl.style.fontFamily = 'sans-serif'
     introEl.style.fontWeight = 'bold'
-    introEl.style.color = '#fff'
-    layerEl.style.textShadow = '0 2px rgba(0,0,0,.5)';
+    introEl.style.color = '#fff';
     introEl.style.textAlign = 'center'
-    introEl.textContent = 'CLICK ON ANY UNDESIRABLE ELEMENT. BE CAREFUL, UNEXPECTED BEHAVIOR CAN HAPPEN.'
+    introEl.style.zIndex = 2147483647;
     layerEl.appendChild(introEl)
+
+    // Intro text
+    introTextEl = document.createElement('span')
+    introTextEl.style.display = 'inline-block';
+    introTextEl.style.fontSize = 'inherit';
+    introTextEl.style.fontFamily = 'inherit';
+    introTextEl.style.fontWeight = 'inherit';
+    introTextEl.style.color = '#000'
+    introTextEl.style.background = '#FFF';
+    introTextEl.style.lineHeight = 1.2;
+    introTextEl.style.padding = '.5em';
+    introTextEl.textContent = 'CLICK ON ANY UNDESIRABLE ELEMENT. USE RIGHT CLICK FOR MORE THAN ONE. BE CAREFUL, UNEXPECTED BEHAVIOR CAN HAPPEN.'
+    introEl.appendChild(introTextEl)
 
     // Abort button
     abortEl = document.createElement('span');
@@ -41,6 +56,7 @@
     abortEl.style.padding = '.5em 1em'
     abortEl.style.fontFamily = 'sans-serif'
     abortEl.style.fontWeight = 'bold'
+    abortEl.style.lineHeight = 2
     abortEl.style.color = '#fff'
     abortEl.style.textAlign = 'center';
     abortEl.style.background = '#000'
@@ -53,8 +69,14 @@
     // Overlay area
     overlayEl = document.createElement('div')
     overlayEl.style.position = 'absolute'
-    overlayEl.style.background = 'rgba(255,0,0,.5)';
+    overlayEl.style.top = '-10px';
+    overlayEl.style.left = '-10px';
+    overlayEl.style.background = 'linear-gradient(45deg, #f00 0%, #f00 5%, #f000 5.01%, #f000 44.9%, #f00 45%, #f00 55%, #f000 55.01%, #f000 95%, #f00 95%, #f00 100%)';
+    overlayEl.style.backgroundSize = '10px 10px';
+    overlayEl.style.border = '5px solid red';
+    overlayEl.style.boxSizing = 'border-box';
     overlayEl.style.zIndex = 2147483646;
+    overlayEl.style.cursor = 'crosshair';
     layerEl.appendChild(overlayEl);
 
     // Listens to key down to abort mission
@@ -135,7 +157,9 @@
 
   function zapperEnd () {
     window.removeEventListener('keydown', keyPressListener)
-    document.body.removeChild(layerEl);
+    if (layerEl.parentElement) {
+      document.body.removeChild(layerEl);
+    }
   }
 
   function keyPressListener (e) {
