@@ -20,6 +20,7 @@
     layerEl.style.right = 0;
     layerEl.style.background = 'rgba(127,127,127,.5)';
     layerEl.style.zIndex = 2147483645;
+    layerEl.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
     layerEl.addEventListener('mousemove', overlayTarget);
     layerEl.addEventListener('click', zappTargetAndEnd);
     layerEl.addEventListener('contextmenu', zappOneTarget);
@@ -29,7 +30,7 @@
     introEl = document.createElement('p')
     introEl.style.width = '50%';
     introEl.style.fontSize = '1.5rem';
-    introEl.style.fontFamily = 'sans-serif'
+    introEl.style.fontFamily = 'inherit'
     introEl.style.fontWeight = 'bold'
     introEl.style.color = '#fff';
     introEl.style.textAlign = 'center'
@@ -62,7 +63,7 @@
     abortEl.style.background = '#000'
     abortEl.style.cursor = 'pointer';
     abortEl.style.zIndex = 2147483647;
-    abortEl.textContent = 'ABORT'
+    abortEl.textContent = 'ABOЯT'
     abortEl.addEventListener('click', abortMission);
     layerEl.appendChild(abortEl)
 
