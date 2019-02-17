@@ -1,5 +1,6 @@
 (function(){
   var layerEl, introEl, abortEl, overlayEl;
+  var ESC_KEY = 27;
 
   function buildLayout() {
 
@@ -17,7 +18,8 @@
     layerEl.style.background = 'rgba(127,127,127,.5)';
     layerEl.style.zIndex = 2147483645;
     layerEl.addEventListener('mousemove', overlayTarget);
-    layerEl.addEventListener('click', zappTarget);
+    layerEl.addEventListener('click', zappTargetAndEnd);
+    layerEl.addEventListener('contextmenu', zappOneTarget);
     document.body.appendChild(layerEl);
 
     // Intro
@@ -53,7 +55,10 @@
     overlayEl.style.position = 'absolute'
     overlayEl.style.background = 'rgba(255,0,0,.5)';
     overlayEl.style.zIndex = 2147483646;
-    layerEl.appendChild(overlayEl)
+    layerEl.appendChild(overlayEl);
+
+    // Listens to key down to abort mission
+    window.addEventListener('keydown', keyPressListener)
   }
 
   function findGuiltyDiv (el) {
@@ -97,17 +102,46 @@
     document.body.appendChild(layerEl);
   }
 
-  function zappTarget (e) {
+  function zappOneTarget (e, isEnding) {
+    // Blocks click behavior
+    e.stopPropagation();
+    e.preventDefault();
+
+    // Remove interface (temporarly)
     document.body.removeChild(layerEl);
 
+    // Remove the undesired element
     var el = findGuiltyDiv(document.elementFromPoint(e.x, e.y))
-    el.parentElement.removeChild(el)
+    el.parentElement.removeChild(el);
+
+    // Re append the interface (if desired)
+    if (isEnding) {
+      zapperEnd();
+    }
+    else {
+      document.body.appendChild(layerEl);
+    }
   }
 
+  function zappTargetAndEnd (e) {
+    zappOneTarget(e, true);
+  }
+ 
   function abortMission (e) {
     e.stopPropagation();
     e.preventDefault();
+    zapperEnd();
+  }
+
+  function zapperEnd () {
+    window.removeEventListener('keydown', keyPressListener)
     document.body.removeChild(layerEl);
+  }
+
+  function keyPressListener (e) {
+    if (e.keyCode === ESC_KEY) {
+      zapperEnd();
+    }
   }
 
   buildLayout();

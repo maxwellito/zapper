@@ -33,7 +33,7 @@ So injected script was the default choice. It's not perfect, but for a hack it's
 
 > Any tips?
 
-*Yes! To kill more than one item per injection, press SPACE then click on all undesired elements.*
+*Yes! To kill more than one item per injection, use right click. Then ESC key to abort anytime.*
 
 > Improvment planned?
 
