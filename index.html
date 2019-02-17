@@ -1,47 +1,95 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
     <title>ZAPPEЯ : popup killr!</title>
     <style>
       body {
         margin: 0 0 40px;
-        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
         font-weight: 300;
-        font-size: 24px;
+        font-size: 18px;
         color: #666666;
         background-color: #f9f9f9;
+      }
+      video {
+        display: block;
+        margin: auto;
+        border: 12px solid #ccc;
+      }
+      * {
+        max-width: 100%;
+      }
+
+      .panel {
+        margin: 2rem 1rem;
+        text-align: center;
+      }
+      .hidden {
+        display: none;
+      }
+      .instruction {
+        font-style: italic;
+        font-size: 0.75em;
+        margin-top: 1.5em;
       }
       .link {
         color: inherit;
       }
-      .panel {
-        margin: 5% 10%;
-        width: 80%;
-        text-align: center;
-      }
-      .button {
-        padding: 6px 12px;
-        box-shadow: 4px 4px 0 #ccc;
+
+      .headlineButton {
+        padding: 0.25em 0.5em;
+        box-shadow: 0.125em 0.125em 0 #ccc;
         color: #ffffff;
         background-color: #000000;
+        font-size: 2em;
         font-style: italic;
         font-weight: bold;
         text-decoration: none;
         text-transform: uppercase;
       }
-      .credits {
-        font-size: 0.6125em;
-        font-style: italic;
+      .introArrow {
+        display: none;
+        font-size: 2em;
+        position: relative;
+        top: -0.75em;
+        color: #ccc;
+        left: -0.125em;
+      }
+      .code {
+        background-color: #ccc;
+        word-break: break-all;
+        display: inline-block;
+        font-family: monospace;
+        text-align: left;
+        padding: 0.25em 0.5em 0.375em;
+        font-size: 0.75em;
+        max-width: 500px;
       }
 
-      @media only screen and (max-width:480px) {
+      @media only screen and (min-width: 480px) {
+        body {
+          font-size: 24px;
+        }
         .panel {
-          position: inherit;
-          width: auto;
-          height: auto;
-          margin: 20px;
+          margin: 2rem auto;
+          width: 80%;
+          max-width: 1200px;
+        }
+        .introArrow {
+          display: inline-block;
+        }
+        .tutorial {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+        .tutorialStep {
+          width: 45%;
         }
       }
     </style>
@@ -49,13 +97,73 @@
 
   <body>
     <div class="panel">
-
-      <p>Drag and drop the following button to your bookmark bar.<p>
-
-      <p><a class="button" onclick="alert('Don\'t click on it, just drag and drop it to your bookmark bar. Try again.'); return false;" href="javascript:(a%20=%20(b%20=%20document).createElement('script')).src%20=%20'https://maxwellito.github.io/zapper/injector.js',%20b.body.appendChild(a);void(0);" title="ZAPPEЯ link">ZAPPEЯ</a></p>
-
-      <p class="credits">by <a class="link" href="https://twitter.com/mxwllt">@mxwllt</a> on <a class="link" href="https://github.com/maxwellito/zapper">GitHub</a></p>
+      <a
+        class="headlineButton"
+        onclick="alert('Don\'t click on it, just drag and drop it to your bookmark bar. Try again.'); return false;"
+        title="ZAPPEЯ link"
+        id="bootstrapLink"
+        >ZAPPEЯ</a
+      >
+      <span class="introArrow">⤴</span>
+      <p class="instruction">
+        Drag and drop the button above to your bookmark bar.
+      </p>
+      <p></p>
     </div>
 
+    <div id="chromeMac" class="hidden panel">
+      <p>
+        Ok, Chrome on Mac OS is being a b*tch.<br />
+        It's no longer possible to drag and drop a link to the bookmark bar.<br />
+        Intentional? Bug? Conspiracy from peanut butter jelly time? Nobody
+        knows.<br />
+        You can still create a bookmark shortcut with the following URL
+      </p>
+      <p class="code" id="chromeMacUrl"></p>
+    </div>
+
+    <p class="panel">
+      ZAPPEЯ is little script to remove annoying parts of a website like big
+      banners, popups with hidden cross, overlays blocking your navigation...
+      <br />
+      Sadly it's not for mobile.
+    </p>
+
+    <div class="tutorial panel">
+      <div class="tutorialStep">
+        <p>Install it by drag and drop</p>
+        <video src="assets/step_001.mp4" mute autoplay loop></video>
+      </div>
+      <div class="tutorialStep">
+        <p>
+          Use it by clicking on the ZAPPEЯ shortcut. Then click on the annoying
+          element of the page.
+        </p>
+        <video src="assets/step_002.mp4" mute autoplay loop></video>
+      </div>
+    </div>
+
+    <p class="panel instruction">
+      by <a class="link" href="https://twitter.com/mxwllt">@mxwllt</a> on
+      <a class="link" href="https://github.com/maxwellito/zapper">GitHub</a>
+    </p>
   </body>
+  <script>
+    // Generate link
+    const bootstrapScript = `javascript:(a=(b=document).createElement('script')).src='https://${
+      location.host
+    }/zapper/injector.js',b.body.appendChild(a);void(0);`;
+    document
+      .getElementById("bootstrapLink")
+      .setAttribute("href", bootstrapScript);
+
+    // Check if drag and drop will be an issue
+    if (
+      navigator.platform === "MacIntel" &&
+      navigator.vendor === "Google Inc."
+    ) {
+      document.getElementById("chromeMac").style.display = "inherit";
+      document.getElementById("chromeMacUrl").textContent = bootstrapScript;
+    }
+  </script>
 </html>
