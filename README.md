@@ -2,9 +2,18 @@
 
 Injectable script to kill popups and banners. [Install ZAPPEЯ here](https://maxwellito.github.io/zapper)
 
+Nowadays, browsing the internet is a pain. Too many popups are blocking us form the content. News websites are a good examples, with extra large fixed top navigation that blocks a third of the screen. Of course, if you are reading this, you know how to open the web tools, find the annoying div then get rid of it. But this process is incredibly annoying. Something quick and dirty has to be made. Browser extension? No, it needs be published, people needs to install it, there's more than one browser to maintain.
+
+So injected script was the default choice. It's not perfect, but for a hack it's fine. 
+
 **WARNING**: Not guaranteed to work, and might not behave like expected.
 
+
 ## FAQ
+
+> How do I install it on mobile?
+
+*Forget about it. It's for desktop.*
 
 > This script doesn't work on Facebook, why?
 
@@ -34,3 +43,8 @@ Injectable script to kill popups and banners. [Install ZAPPEЯ here](https://max
 
 *Nobody knows. At ZAPPEЯ we care about your privacy and don't add analytics services to get stats about our users. Our hand crafted script use pure JavaScript from ES5 without extra library.*
 
+## Contribute
+
+Improvements and crazy ideas are welcome. 
+
+Be aware the injected script will remain non-uglified and with comments. Any developer should be able to read and understand the code they inject in their webpage.
